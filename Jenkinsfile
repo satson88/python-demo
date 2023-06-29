@@ -45,10 +45,10 @@ pipeline {
          stage('Code Analysis') {
             steps {
                 sh "/opt/sonar-scanner/bin/sonar-scanner \
-                    -Dsonar.projectKey=demo-nodejs \
+                    -Dsonar.projectKey=python-demo \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://sonar.manolabs.co.in:9000 \
-                    -Dsonar.login=sqp_d5fbbdfcf09bc49b5e9a0edb89639fc66aa45993"
+                    -Dsonar.login=sqp_e0ba0ddf058d127efdd87598d5d6ec0a66e1680f"
             }
         }
 
