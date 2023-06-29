@@ -7,7 +7,7 @@ pipeline {
         imageName = "python-demo"  // Replace with your desired image name
         containerName = "python-app-container"  // Replace with your desired container name
         dockerfilePath = "./Dockerfile"  // Replace with the path to your Dockerfile
-        dockerArgs = "-p 5000:5000"  // Replace with your desired container arguments
+        dockerArgs = "-p 8085:5000"  // Replace with your desired container arguments
         version = sh(script: 'jq \'.version\' version.json', returnStdout: true).trim()
     }
     stages {
