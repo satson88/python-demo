@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        registry = "sen31088"  // Replace with your Docker registry URL
-        DOCKERHUB_CREDENTIALS= credentials('docker-sen31088')
+        registry = "satson88"  // Replace with your Docker registry URL
+        DOCKERHUB_CREDENTIALS= credentials('docker-satson88')
         imageName = "python-demo"  // Replace with your desired image name
         containerName = "python-app-container"  // Replace with your desired container name
         dockerfilePath = "./Dockerfile"  // Replace with the path to your Dockerfile
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('SCM'){
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'sen', url: 'https://github.com/sen31088/nodejs-demo.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/satson88/python-demo.git']])
             }
         }
         
@@ -42,7 +42,7 @@ pipeline {
             }
         }
 
-         stage('Code Analysis') {
+         /*stage('Code Analysis') {
             steps {
                 sh "/opt/sonar-scanner/bin/sonar-scanner \
                     -Dsonar.projectKey=python-demo \
@@ -50,12 +50,12 @@ pipeline {
                     -Dsonar.host.url=http://sonar.manolabs.co.in:9000 \
                     -Dsonar.login=sqp_e0ba0ddf058d127efdd87598d5d6ec0a66e1680f"
             }
-        }
+        }*/
 
         stage('Deploy') {
             steps {
                  sh '''
-                ssh root@10.0.1.207 <<  EOF
+                ssh root@10.0.1.205 <<  EOF
                 
                 docker rm  -f ${containerName} 1> /dev/null 2>&1
 
