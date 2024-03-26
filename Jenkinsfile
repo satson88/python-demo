@@ -50,7 +50,7 @@ pipeline {
                     -Dsonar.host.url=http://sonar.manolabs.co.in:9000 \
                     -Dsonar.login=sqp_e0ba0ddf058d127efdd87598d5d6ec0a66e1680f"
             }
-        }*/
+        }
 
         stage('Deploy') {
             steps {
@@ -69,6 +69,21 @@ pipeline {
 
                 '''
             }
+        } */
+        stage('Deploy') {
+            steps {
+                 sh '''
+                 
+                 export KUBECONFIG=/var/lib/jenkins/kubeconfig
+
+                 sed "s/{{theversion}}/$version/g" resources/deployment.yaml > deployment-amend.yaml
+
+                 kubectl apply -f deployment-amend.yaml
+                 
+                 kubectl apply -f resources/service.yaml
+                 
+                 '''
+                }
         }
     }
 }
