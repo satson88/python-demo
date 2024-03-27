@@ -8,7 +8,8 @@ pipeline {
         containerName = "python-app-container"  // Replace with your desired container name
         dockerfilePath = "./Dockerfile"  // Replace with the path to your Dockerfile
         dockerArgs = "-p 8085:5000"  // Replace with your desired container arguments
-        version = sh(script: 'jq \'.version\' version.json', returnStdout: true).trim()
+        version = sh(script: 'jq \'.version\' version.json | awk -F \'\\\"\' \'{print $2}\'', returnStdout: true).trim()
+
     }
     stages {
         stage('Clean WS') { 
